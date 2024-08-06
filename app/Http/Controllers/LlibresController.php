@@ -20,7 +20,7 @@ class LlibresController extends Controller
 
         $llibresRandom = Llibre::inRandomOrder()->limit(10)->get();
 
-        return view('llibres.index',[
+        return view('llibres.index', [
             'llibres' => $llibres,
             'llibresRandom' => $llibresRandom,
         ]);
@@ -32,8 +32,6 @@ class LlibresController extends Controller
     public function create()
     {
         return view('llibres.create');
-
-
     }
 
     /**
@@ -65,7 +63,6 @@ class LlibresController extends Controller
             $llibreAttributes['portada'] = $nombrePortada; // Asigna el nombre de la imagen al atributo 'portada' en $llibreAttributes
         }
 
-
         Llibre::create($llibreAttributes);
 
         return redirect('/');
@@ -90,7 +87,7 @@ class LlibresController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update( Llibre $llibre)
+    public function update(Llibre $llibre)
     {
         $validatedAttributes = request()->validate([
             'titol' => ['required'],
@@ -102,23 +99,22 @@ class LlibresController extends Controller
             'idioma' => ['required'],
             'coleccio' => ['required'],
             'portada' => ['file', 'mimes:png,svg,jpg,webp'],
-
         ]);
         if (request()->hasFile('portada')) {
-            // Almacenar la portada en el sistema de archivos
-            $portadaPath = request()->file('portada')->store('portadas', 'public');
+            $portada = request()->file('portada');
+            $nombrePortada = $portada->getClientOriginalName(); // Obtén el nombre original del archivo
 
-            // Agregar la ruta de la portada a los atributos validados
-            $validatedAttributes['portada'] = $portadaPath;
+            // Redimensionar la imagen usando Intervention Image
+            $image = Image::make($portada->getRealPath());
+            $image->resize(300, 200); // Cambia el tamaño a 300x200 píxeles
+            $image->save(storage_path('app/public/' . $nombrePortada)); // Guarda la imagen redimensionada en storage/app/public
 
-            // Opcionalmente, podrías eliminar la portada anterior aquí si tu aplicación lo requiere
+            $llibreAttributes['portada'] = $nombrePortada; // Asigna el nombre de la imagen al atributo 'portada' en $llibreAttributes
             // Storage::disk('public')->delete($llibre->portada);
         }
 
         // Actualizar el libro con los atributos validados
         $llibre->update($validatedAttributes);
-
-
 
         return redirect('/llibres/' . $llibre->id);
     }
