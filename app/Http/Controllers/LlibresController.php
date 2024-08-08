@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Llibre;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules\File;
-use Illuminate\Database\Eloquent\Builder;
-use Intervention\Image\Facades\Image; // Importa la fachada de Intervention Image
+
 
 class LlibresController extends Controller
 {
@@ -52,15 +49,10 @@ class LlibresController extends Controller
             'portada' => ['file', 'mimes:png,svg,jpg,webp'],
         ]);
         if ($request->hasFile('portada')) {
-            $portada = $request->file('portada');
-            $nombrePortada = $portada->getClientOriginalName(); // Obtén el nombre original del archivo
+            $portada = $request->file('portada')->store('portadas', 'public');
 
-            // Redimensionar la imagen usando Intervention Image
-            $image = Image::make($portada->getRealPath());
-            $image->resize(300, 200); // Cambia el tamaño a 300x200 píxeles
-            $image->save(storage_path('app/public/' . $nombrePortada)); // Guarda la imagen redimensionada en storage/app/public
 
-            $llibreAttributes['portada'] = $nombrePortada; // Asigna el nombre de la imagen al atributo 'portada' en $llibreAttributes
+            $llibreAttributes['portada'] = $portada; // Asigna el nombre de la imagen al atributo 'portada' en $llibreAttributes
         }
 
         Llibre::create($llibreAttributes);
@@ -101,15 +93,10 @@ class LlibresController extends Controller
             'portada' => ['file', 'mimes:png,svg,jpg,webp'],
         ]);
         if (request()->hasFile('portada')) {
-            $portada = request()->file('portada');
-            $nombrePortada = $portada->getClientOriginalName(); // Obtén el nombre original del archivo
+            $portada = request()->file('portada')->store('portadas', 'public');
 
-            // Redimensionar la imagen usando Intervention Image
-            $image = Image::make($portada->getRealPath());
-            $image->resize(300, 200); // Cambia el tamaño a 300x200 píxeles
-            $image->save(storage_path('app/public/' . $nombrePortada)); // Guarda la imagen redimensionada en storage/app/public
 
-            $llibreAttributes['portada'] = $nombrePortada; // Asigna el nombre de la imagen al atributo 'portada' en $llibreAttributes
+            $llibreAttributes['portada'] = $portada; // Asigna el nombre de la imagen al atributo 'portada' en $llibreAttributes
             // Storage::disk('public')->delete($llibre->portada);
         }
 

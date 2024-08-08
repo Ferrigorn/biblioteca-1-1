@@ -33,14 +33,19 @@ class RegisteredUserController extends Controller
         $userAttributes = $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'confirmed', Password::min(8)]
+            'password' => ['required', 'confirmed', Password::min(8)],
+            'foto' => ['nullable', 'file', 'mimes:png,svg,jpg,webp'],
         ]);
+        if (request()->hasFile('foto')) {
+            $fotoPath = request()->file('foto')->store('fotos', 'public');
+
+            $userAttributes['foto'] = $fotoPath;
+            // Storage::disk('public')->delete($llibre->portada);
+        }
         $user = User::create($userAttributes);
 
         Auth::login($user);
 
-        return redirect('/');
+        return redirect('/perfil/' . $user->id);
     }
-
-
 }

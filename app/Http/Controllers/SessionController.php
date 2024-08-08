@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -50,25 +51,40 @@ class SessionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        return view('auth.perfil', ['user' => $user]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('auth.edit', ['user' => $user]);
     }
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(User $user)
     {
-        //
+        $validatedAttributes = request()->validate([
+            'name' => ['required'],
+            'email' => ['required'],
+            'password' => ['required', 'confirmed'],
+            'foto' => ['file', 'mimes:png,svg,jpg,webp'],
+        ]);
+        if (request()->hasFile('foto')) {
+            $fotoPath = request()->file('foto')->store('fotos', 'public');
+
+            $validatedAttributes['foto'] = $fotoPath;
+            // Storage::disk('public')->delete($llibre->portada);
+        }
+
+        // Actualizar el libro con los atributos validados
+        $user->update($validatedAttributes);
+
+        return redirect('/perfil/' . $user->id);
     }
 
     /**

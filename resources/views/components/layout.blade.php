@@ -40,7 +40,8 @@
 
         @auth
             <div class="flex  items-center">
-                <a href="/perfil"><x-forms.button>Perfil</x-forms.button></a>
+                {{-- Auth::user()->id ho passem perque identifiqui l'usuari autentificat --}}
+                <a href="/perfil/{{ Auth::user()->id }}"><x-forms.button>Perfil</x-forms.button></a>
                 <a href="/crearllibres"><x-forms.button>Crear Llibre</x-forms.button></a>
                 <x-forms.form method="POST" action="/logout">
                     @csrf
