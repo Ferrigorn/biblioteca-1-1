@@ -11,17 +11,51 @@ class LlibresController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $llibres = Llibre::paginate(9);
+        // Obtén el género de la solicitud, si está presente
+        $selectedGenere = $request->query('genere');
+
+        // Obtén todos los géneros únicos de los libros
+        $generes = Llibre::select('genere')->distinct()->pluck('genere');
+
+        // Filtra los libros por género si se proporciona
+        if ($selectedGenere && $generes->contains($selectedGenere)) {
+            $llibres = Llibre::where('genere', $selectedGenere)->paginate(9);
+        } else {
+            $llibres = Llibre::paginate(9);
+        }
 
         $llibresRandom = Llibre::inRandomOrder()->limit(10)->get();
 
         return view('llibres.index', [
             'llibres' => $llibres,
             'llibresRandom' => $llibresRandom,
+            'generes' => $generes,
+            'selectedGenere' => $selectedGenere
         ]);
     }
+
+    public function showGenere($genere)
+    {
+        // Obtén todos los géneros únicos de los libros
+        $generes = Llibre::select('genere')->distinct()->pluck('genere');
+
+        // Verifica si el género es válido
+        if (!$generes->contains($genere)) {
+            abort(404);
+        }
+
+        // Obtén los libros del género específico
+        $llibres = Llibre::where('genere', $genere)->paginate(9);
+
+        return view('llibres.genere', [
+            'llibres' => $llibres,
+            'generes' => $generes,
+            'selectedGenere' => $genere
+        ]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

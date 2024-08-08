@@ -23,6 +23,8 @@ Route::patch('/perfil/{user}', [SessionController::class, 'update']);
 Route::post('/logout', [SessionController::class, 'destroy']);
 
 //pagina tots els llibres
+Route::get('/llibres', [LlibresController::class, 'index'])->name('llibres.index');
+Route::get('/llibres/genere/{genere}', [LlibresController::class, 'showGenere'])->name('llibres.genere');
 Route::get('/', [LlibresController::class, 'index']);
 //pagina llibre sol
 Route::get('/llibres/{llibre}', [LlibresController::class, 'show']);
