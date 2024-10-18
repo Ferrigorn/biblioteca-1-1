@@ -9,8 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&display=swap" rel="stylesheet">
 
+
     <title>Biblioteca Molongui</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="bg-black text-white px-4 py-4 font-gotisch">
@@ -49,6 +51,10 @@
                 </x-forms.form>
             </div>
         @endauth
+
+
+
+
 
     </div>
     <x-forms.divider />

@@ -13,7 +13,7 @@
 
         </div>
         <div class="h-auto flex items-center w-1/2 ">
-            <img src="{{ asset('storage/' . $user->foto) }}" alt="" class="  flex h-auto w-full">
+            <img src="{{ asset('storage/' . $user->foto) }}" alt="" class="  flex h-auto w-300px">
         </div>
 
     </div>

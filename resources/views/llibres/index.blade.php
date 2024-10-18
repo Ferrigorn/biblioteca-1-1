@@ -1,19 +1,26 @@
 <x-layout>
-    {{-- tags = generes --}}
-    {{-- carrusel llibres random --}}
+    {{-- Valoracio llibres --}}
+    {{-- marcar llegits --}}
+
     {{-- carrusel llibres + ben valorats --}}
-    {{-- titol --}}
+
     <x-titol-pagina>Biblioteca</x-titol-pagina>
     {{-- buscador llibres --}}
     <section>
-        <x-forms.input label="Buscador" name="buscador"></x-forms.input>
+        <div class="flex flex-col items-center justify-center">
+            <form method="GET" action="/llibres/resultats">
+                <x-forms.input label="Buscador" name="buscador"></x-forms.input>
+                <x-forms.button type="submit">Cercar</x-forms.button>
+            </form>
+        </div>
     </section>
+
 
     <x-forms.divider />
 
     <section class="flex flex-col justify-center items-center">
         <x-titol-seccio>Gèneres</x-titol-seccio>
-        <div class="flex flex-row gap-3">
+        <div class="flex flex-row gap-3 flex-wrap">
             @foreach ($generes as $genere)
                 <a href="{{ route('llibres.genere', ['genere' => $genere]) }}"
                     class="text-sm rounded-xl p-2 bg-white/10 hover:bg-slate-500 hover:scale-125 transition duration-200">{{ $genere }}</a>

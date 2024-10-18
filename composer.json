@@ -9,6 +9,7 @@
         "intervention/image": "^3.7.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
+        "laravel/ui": "^4.5",
         "spatie/image": "^3.7"
     },
     "require-dev": {
