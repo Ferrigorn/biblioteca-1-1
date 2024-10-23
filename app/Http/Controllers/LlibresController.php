@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Llibre;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 
 class LlibresController extends Controller
 {
@@ -126,19 +126,27 @@ class LlibresController extends Controller
             'coleccio' => ['required'],
             'portada' => ['file', 'mimes:png,svg,jpg,webp'],
         ]);
+
+        // Si es puja una nova portada, la desem i esborrem l'antiga
         if (request()->hasFile('portada')) {
+            // Desa la nova imatge
             $portada = request()->file('portada')->store('portadas', 'public');
 
+            // Esborra la portada anterior si n'hi havia
+            if ($llibre->portada) {
+                Storage::disk('public')->delete($llibre->portada);
+            }
 
-            $llibreAttributes['portada'] = $portada; // Asigna el nombre de la imagen al atributo 'portada' en $llibreAttributes
-            // Storage::disk('public')->delete($llibre->portada);
+            // Afegir la nova portada a l'array validat
+            $validatedAttributes['portada'] = $portada;
         }
 
-        // Actualizar el libro con los atributos validados
+        // Actualitzar el llibre amb els atributs validats, incloent la portada
         $llibre->update($validatedAttributes);
 
         return redirect('/llibres/' . $llibre->id);
     }
+
 
     /**
      * Remove the specified resource from storage.
