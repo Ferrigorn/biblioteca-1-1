@@ -36,6 +36,24 @@ class LlibresController extends Controller
         ]);
     }
 
+    //funcio per el buscador
+    public function showResultats(Request $request)
+    {
+        $query = $request->input('buscador');
+
+        $llibres = Llibre::query();
+
+        if ($query) {
+            // per titol o autor
+            $llibres = $llibres->where('titol', 'like', '%' . $query . '%')
+                ->orWhere('autor', 'like', '%' . $query . '%');
+        }
+
+        $llibres = $llibres->get();
+
+        return view('llibres.resultats', compact('llibres'));
+    }
+
     public function showGenere($genere)
     {
         // Obtén todos los géneros únicos de los libros

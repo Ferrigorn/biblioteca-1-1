@@ -26,6 +26,8 @@ Route::post('/logout', [SessionController::class, 'destroy']);
 Route::get('/llibres', [LlibresController::class, 'index'])->name('llibres.index');
 Route::get('/llibres/genere/{genere}', [LlibresController::class, 'showGenere'])->name('llibres.genere');
 Route::get('/', [LlibresController::class, 'index']);
+//pagina buscador/resultats
+Route::get('/llibres/resultats', [LlibresController::class, 'showResultats'])->name('llibres.resultats');
 //pagina llibre sol
 Route::get('/llibres/{llibre}', [LlibresController::class, 'show']);
 //pagina crear, modificar o eliminar llibre
@@ -34,4 +36,3 @@ Route::post('/llibres', [LlibresController::class, 'store']);
 Route::get('/llibres/{llibre}/edit', [LlibresController::class, 'edit']);
 Route::patch('/llibres/{llibre}', [LlibresController::class, 'update']);
 Route::delete('/llibres/{llibre}', [LlibresController::class, 'destroy']);
-//pagina buscador/resultats

@@ -6,8 +6,14 @@
     <x-titol-pagina>Biblioteca</x-titol-pagina>
     {{-- buscador llibres --}}
     <section>
-        <x-forms.input label="Buscador" name="buscador"></x-forms.input>
+        <div class="flex flex-col items-center justify-center">
+            <form method="GET" action="/llibres/resultats">
+                <x-forms.input label="Buscador" name="buscador"></x-forms.input>
+                <x-forms.button type="submit">Cercar</x-forms.button>
+            </form>
+        </div>
     </section>
+
 
     <x-forms.divider />
 
