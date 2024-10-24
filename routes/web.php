@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ValoracionController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -15,7 +16,7 @@ Route::get('/registre', [RegisteredUserController::class, 'create']);
 Route::post('/registre', [RegisteredUserController::class, 'store']);
 
 //pagina login + perfil
-Route::get('/login', [SessionController::class, 'create']);
+Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 Route::get('/perfil/{user}', [SessionController::class, 'show']);
 Route::get('/perfil/{user}/edit', [SessionController::class, 'edit']);
@@ -36,3 +37,5 @@ Route::post('/llibres', [LlibresController::class, 'store']);
 Route::get('/llibres/{llibre}/edit', [LlibresController::class, 'edit']);
 Route::patch('/llibres/{llibre}', [LlibresController::class, 'update']);
 Route::delete('/llibres/{llibre}', [LlibresController::class, 'destroy']);
+//valoracions
+Route::post('llibres/{llibre}/valoraciones', [ValoracionController::class, 'store'])->middleware('auth')->name('valoraciones.store');
