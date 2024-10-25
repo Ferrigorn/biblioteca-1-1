@@ -26,6 +26,13 @@ class Llibre extends Model
         return $this->hasMany(Valoracion::class);
     }
 
+    // realció amb comentaris
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class);
+    }
+
+
     // Método para calcular la mediana de las valoraciones
     public function getMedianaValoracionesAttribute()
     {

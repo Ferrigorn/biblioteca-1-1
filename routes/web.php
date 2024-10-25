@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\LlibresController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisteredUserController;
@@ -39,3 +40,5 @@ Route::patch('/llibres/{llibre}', [LlibresController::class, 'update']);
 Route::delete('/llibres/{llibre}', [LlibresController::class, 'destroy']);
 //valoracions
 Route::post('llibres/{llibre}/valoraciones', [ValoracionController::class, 'store'])->middleware('auth')->name('valoraciones.store');
+//comentaris
+Route::post('/llibres/{llibre}/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store');

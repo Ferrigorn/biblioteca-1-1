@@ -17,9 +17,9 @@
 
     <x-forms.divider />
 
-    <section class="flex flex-col justify-center items-center">
+    <section class="flex flex-col justify-center items-center ">
         <x-titol-seccio>Gèneres</x-titol-seccio>
-        <div class="flex flex-row gap-3">
+        <div class="flex flex-row gap-3 flex-wrap justify-around w-3/4">
             @foreach ($generes as $genere)
                 <a href="{{ route('llibres.genere', ['genere' => $genere]) }}"
                     class="text-sm rounded-xl p-2 bg-white/10 hover:bg-slate-500 hover:scale-125 transition duration-200">{{ $genere }}</a>

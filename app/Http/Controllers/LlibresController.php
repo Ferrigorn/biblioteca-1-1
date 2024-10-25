@@ -117,7 +117,13 @@ class LlibresController extends Controller
      */
     public function show(Llibre $llibre)
     {
-        return view('llibres.show', ['llibre' => $llibre]);
+        // Obtener los comentarios paginados del libro
+        $comentarios = $llibre->comentarios()->paginate(10); // 10 comentarios por página
+
+        return view('llibres.show', [
+            'llibre' => $llibre,
+            'comentarios' => $comentarios
+        ]);
     }
 
     /**

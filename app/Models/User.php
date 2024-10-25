@@ -23,6 +23,13 @@ class User extends Authenticatable
         'foto'
     ];
 
+    // relació amb Comentaris
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class);
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *
