@@ -42,3 +42,5 @@ Route::delete('/llibres/{llibre}', [LlibresController::class, 'destroy']);
 Route::post('llibres/{llibre}/valoraciones', [ValoracionController::class, 'store'])->middleware('auth')->name('valoraciones.store');
 //comentaris
 Route::post('/llibres/{llibre}/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store');
+//marcar llegit
+Route::post('/llibres/{id}/marcar-llegit', [LlibresController::class, 'marcarLlegit'])->middleware('auth')->name('llibres.marcarLlegit');

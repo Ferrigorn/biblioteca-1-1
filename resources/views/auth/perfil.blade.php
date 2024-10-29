@@ -20,6 +20,15 @@
     <a href="/perfil/{{ $user->id }}/edit">
         <x-forms.button>Modificar Perfil</x-forms.button>
     </a>
-    <h1>llista llibres marcats</h1>
+    <h1>Has llegit els següents llibres</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        @forelse($user->llibresLlegits as $llibre)
+            <a href="/llibres/{{ $llibre['id'] }}">
+                <x-card-llibre :$llibre />
+            </a>
+        @empty
+            <p>No has llegit cap llibre encara.</p>
+        @endforelse
+    </div>
 
 </x-layout>

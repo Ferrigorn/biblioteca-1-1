@@ -26,11 +26,7 @@ class Llibre extends Model
         return $this->hasMany(Valoracion::class);
     }
 
-    // realció amb comentaris
-    public function comentarios()
-    {
-        return $this->hasMany(Comentario::class);
-    }
+
 
 
     // Método para calcular la mediana de las valoraciones
@@ -51,5 +47,16 @@ class Llibre extends Model
             // Si el número de valoraciones es par, hacer el promedio de los dos valores centrales
             return ($ratings[$middle - 1] + $ratings[$middle]) / 2;
         }
+    }
+
+    // relació amb comentaris
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class);
+    }
+
+    public function usuaris()
+    {
+        return $this->belongsToMany(User::class, 'llibre_user');
     }
 }

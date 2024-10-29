@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Llibre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class LlibresController extends Controller
 {
@@ -126,6 +127,8 @@ class LlibresController extends Controller
         ]);
     }
 
+
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -170,6 +173,35 @@ class LlibresController extends Controller
 
         return redirect('/llibres/' . $llibre->id);
     }
+
+    //Marcar Llegit
+
+    public function marcarLlegit($id)
+    {
+        $llibre = Llibre::findOrFail($id);
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login')->withErrors('Necessites iniciar sessió per marcar llibres com a llegits.');
+        }
+
+        $user->llibresLlegits()->toggle($llibre->id);
+
+        return redirect()->back()->with('success', 'Llibre marcat com a llegit!');
+    }
+
+
+
+    /**
+     * Mostra els llibres llegits de l'usuari
+     */
+    public function mostrarPerfil()
+    {
+        $llibresLlegits = Auth::user()->llibresLlegits; // Obtenir els llibres llegits
+
+        return view('perfil', compact('llibresLlegits')); // Passar-los a la vista
+    }
+
 
 
     /**

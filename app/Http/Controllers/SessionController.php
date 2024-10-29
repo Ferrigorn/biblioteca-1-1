@@ -53,6 +53,9 @@ class SessionController extends Controller
      */
     public function show(User $user)
     {
+        // Carregar els llibres llegits per l'usuari
+        $user->load('llibresLlegits'); // Assegura't que 'llibresLlegits' és la relació definida al model User
+
         return view('auth.perfil', ['user' => $user]);
     }
 

@@ -1,5 +1,20 @@
 <x-layout>
     <x-card-llibre-show :$llibre />
+
+    <!--Marcar Llegit-->
+
+
+    <div class="container">
+
+
+        <form action="{{ route('llibres.marcarLlegit', $llibre->id) }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-primary">Marcar com a llegit</button>
+        </form>
+    </div>
+
+
+    <!--Valoracions-->
     @auth
         <form action="{{ route('valoraciones.store', $llibre->id) }}" method="POST">
             @csrf
@@ -33,7 +48,6 @@
     <!-- Comentaris -->
 
 
-    <!-- Comentarios -->
     <h2 class="text-xl font-semibold mt-6">Comentarios</h2>
 
     <!-- Desplegable de comentarios con JavaScript -->
@@ -78,6 +92,8 @@
     @else
         <p class="mt-4">Inicia sesión para comentar.</p>
     @endif
+
+
 
     <a href="/llibres/{{ $llibre->id }}/edit">
         <x-forms.button>Modificar dades</x-forms.button>

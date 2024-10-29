@@ -1,12 +1,22 @@
 <?php
 
+
+
 namespace App\Models;
+
+
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Llibre[] $llibresLlegits
+ */
+/**
+ * @method \Illuminate\Database\Eloquent\Relations\BelongsToMany llibresLlegits()
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -27,6 +37,12 @@ class User extends Authenticatable
     public function comentarios()
     {
         return $this->hasMany(Comentario::class);
+    }
+
+    //marcar llegit
+    public function llibresLlegits()
+    {
+        return $this->belongsToMany(Llibre::class, 'llibre_user');
     }
 
 
