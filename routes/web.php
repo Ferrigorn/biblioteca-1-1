@@ -30,6 +30,9 @@ Route::get('/llibres/genere/{genere}', [LlibresController::class, 'showGenere'])
 Route::get('/', [LlibresController::class, 'index']);
 //pagina buscador/resultats
 Route::get('/llibres/resultats', [LlibresController::class, 'showResultats'])->name('llibres.resultats');
+//autors
+Route::get('/llibres/autors', [LlibresController::class, 'showAutors'])->name('llibres.autors');
+Route::get('/llibres/autors/{autor}', [LlibresController::class, 'llibresAutor']);
 //pagina llibre sol
 Route::get('/llibres/{llibre}', [LlibresController::class, 'show']);
 //pagina crear, modificar o eliminar llibre

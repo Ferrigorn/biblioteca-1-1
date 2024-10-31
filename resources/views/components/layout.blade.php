@@ -23,8 +23,8 @@
         <div>
             <nav class="w-96 flex flex-row justify-between">
                 <x-a-nav href="/">Llibres</x-a-nav>
-                <x-a-nav href="#">Autors</x-a-nav>
-                <x-a-nav href="#">Gèneres</x-a-nav>
+                <x-a-nav href="/llibres/autors">Autors</x-a-nav>
+
             </nav>
         </div>
 

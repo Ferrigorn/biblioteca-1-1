@@ -75,6 +75,22 @@ class LlibresController extends Controller
         ]);
     }
 
+    //Autors
+    public function showAutors()
+    {
+        $autors = Llibre::select('autor')->distinct()->get();
+        return view('llibres.autor', compact('autors'));
+    }
+
+    public function llibresAutor($autor)
+    {
+        // Obtenim els llibres de l'autor seleccionat
+        $llibres = Llibre::where('autor', $autor)->get();
+
+        // Passar l'autor i els llibres a la vista
+        return view('llibres.llibres-autor', compact('autor', 'llibres'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
