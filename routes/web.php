@@ -28,6 +28,7 @@ Route::post('/logout', [SessionController::class, 'destroy']);
 Route::get('/llibres', [LlibresController::class, 'index'])->name('llibres.index');
 Route::get('/llibres/genere/{genere}', [LlibresController::class, 'showGenere'])->name('llibres.genere');
 Route::get('/', [LlibresController::class, 'index']);
+Route::get('/llibres/mes-ben-valorats', [LlibresController::class, 'llibresMesBenValorats']);
 //pagina buscador/resultats
 Route::get('/llibres/resultats', [LlibresController::class, 'showResultats'])->name('llibres.resultats');
 //autors
@@ -42,6 +43,7 @@ Route::get('/llibres/{llibre}/edit', [LlibresController::class, 'edit']);
 Route::patch('/llibres/{llibre}', [LlibresController::class, 'update']);
 Route::delete('/llibres/{llibre}', [LlibresController::class, 'destroy']);
 //valoracions
+
 Route::post('llibres/{llibre}/valoraciones', [ValoracionController::class, 'store'])->middleware('auth')->name('valoraciones.store');
 //comentaris
 Route::post('/llibres/{llibre}/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store');

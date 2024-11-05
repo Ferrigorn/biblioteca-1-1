@@ -29,11 +29,18 @@ class LlibresController extends Controller
 
         $llibresRandom = Llibre::inRandomOrder()->limit(10)->get();
 
+        // Obtenim els llibres amb la valoració mitjana més alta
+        $llibresMesBenValorats = Llibre::withAvg('valoraciones', 'rating')
+            ->orderByDesc('valoraciones_avg_rating')
+            ->take(5)
+            ->get();
+
         return view('llibres.index', [
             'llibres' => $llibres,
             'llibresRandom' => $llibresRandom,
             'generes' => $generes,
-            'selectedGenere' => $selectedGenere
+            'selectedGenere' => $selectedGenere,
+            'llibresMesBenValorats' => $llibresMesBenValorats,
         ]);
     }
 
@@ -45,9 +52,8 @@ class LlibresController extends Controller
         $llibres = Llibre::query();
 
         if ($query) {
-            // per titol o autor
-            $llibres = $llibres->where('titol', 'like', '%' . $query . '%')
-                ->orWhere('autor', 'like', '%' . $query . '%');
+            $llibres = $llibres->whereRaw('LOWER(titol) LIKE ?', ['%' . strtolower($query) . '%'])
+                ->orWhereRaw('LOWER(autor) LIKE ?', ['%' . strtolower($query) . '%']);
         }
 
         $llibres = $llibres->get();
@@ -205,7 +211,6 @@ class LlibresController extends Controller
 
         return redirect()->back()->with('success', 'Llibre marcat com a llegit!');
     }
-
 
 
     /**

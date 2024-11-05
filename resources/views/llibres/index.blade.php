@@ -62,6 +62,18 @@
 
     <div>
         <x-titol-seccio>Millors</x-titol-seccio>
+        @if ($llibresMesBenValorats->isNotEmpty())
+            <ul>
+                @foreach ($llibresMesBenValorats as $llibre)
+                    <li>
+                        <strong>{{ $llibre->titol }}</strong> - Valoració Mitjana:
+                        {{ number_format($llibre->valoraciones_avg_rating, 2) }}
+                    </li>
+                @endforeach
+            </ul>
+        @else
+            <p>No hi ha valoracions disponibles.</p>
+        @endif
     </div>
 
 </x-layout>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Valoracion;
-use App\Models\Llibre;
 use Illuminate\Support\Facades\Auth;
 
 
