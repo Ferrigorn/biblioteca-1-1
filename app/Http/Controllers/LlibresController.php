@@ -32,7 +32,7 @@ class LlibresController extends Controller
         // Obtenim els llibres amb la valoració mitjana més alta
         $llibresMesBenValorats = Llibre::withAvg('valoraciones', 'rating')
             ->orderByDesc('valoraciones_avg_rating')
-            ->take(5)
+            ->take(9)
             ->get();
 
         return view('llibres.index', [

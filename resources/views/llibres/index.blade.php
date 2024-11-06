@@ -1,10 +1,7 @@
 <x-layout>
-    {{-- tags = generes --}}
-    {{-- carrusel llibres random --}}
-    {{-- carrusel llibres + ben valorats --}}
-    {{-- titol --}}
+
     <x-titol-pagina>Biblioteca</x-titol-pagina>
-    {{-- buscador llibres --}}
+
     <section>
         <div class="flex flex-col items-center justify-center">
             <form method="GET" action="/llibres/resultats">
@@ -60,20 +57,24 @@
     </section>
     <x-forms.divider />
 
-    <div>
-        <x-titol-seccio>Millors</x-titol-seccio>
-        @if ($llibresMesBenValorats->isNotEmpty())
-            <ul>
+    <section class="flex flex-col items-center">
+        <x-titol-seccio>Més Ben Valorats</x-titol-seccio>
+        <div class="grid grid-cols-3 gap-5 w-full items-stretch">
+            @if ($llibresMesBenValorats->isNotEmpty())
                 @foreach ($llibresMesBenValorats as $llibre)
-                    <li>
-                        <strong>{{ $llibre->titol }}</strong> - Valoració Mitjana:
-                        {{ number_format($llibre->valoraciones_avg_rating, 2) }}
-                    </li>
+                    <a href="/llibres/{{ $llibre['id'] }}" class="block w-full h-full">
+                        <div class="flex flex-col items-center w-full h-full">
+                            <x-card-llibre :$llibre class="w-full h-64 flex-grow"></x-card-llibre>
+                            <div class="text-center mt-2">
+                                Valoració Mitjana: {{ number_format($llibre->valoraciones_avg_rating, 2) }}
+                            </div>
+                        </div>
+                    </a>
                 @endforeach
-            </ul>
-        @else
-            <p>No hi ha valoracions disponibles.</p>
-        @endif
-    </div>
+            @else
+                <p>No hi ha valoracions disponibles.</p>
+            @endif
+        </div>
+    </section>
 
 </x-layout>
