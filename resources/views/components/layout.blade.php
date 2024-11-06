@@ -30,23 +30,25 @@
 
         @guest
             <div class="flex flex-col gap-2 items-center">
-                <a href="/registre">
-                    <x-forms.button>Crear Compte</x-forms.button>
+                <a href="/registre" class="w-full">
+                    <x-forms.button class="w-full text-center">Crear Compte</x-forms.button>
                 </a>
-                <a href="/login">
-                    <x-forms.button>Log In</x-forms.button>
+                <a href="/login" class="w-full">
+                    <x-forms.button class="w-full text-center">Log In</x-forms.button>
                 </a>
             </div>
         @endguest
 
         @auth
-            <div class="flex  items-center">
+            <div class="flex flex-col gap-2 items-center">
                 {{-- Auth::user()->id ho passem perque identifiqui l'usuari autentificat --}}
-                <a href="/perfil/{{ Auth::user()->id }}"><x-forms.button>Perfil</x-forms.button></a>
-                <a href="/crearllibres"><x-forms.button>Crear Llibre</x-forms.button></a>
-                <x-forms.form method="POST" action="/logout">
+                <a href="/perfil/{{ Auth::user()->id }}" class="w-full"><x-forms.button
+                        class="w-full text-center">Perfil</x-forms.button></a>
+                <a href="/crearllibres" class="w-full"><x-forms.button class="w-full text-center">Crear
+                        Llibre</x-forms.button></a>
+                <x-forms.form method="POST" action="/logout" class="w-full">
                     @csrf
-                    <x-forms.button>Log Out</x-forms.button>
+                    <x-forms.button class="w-full text-center">Log Out</x-forms.button>
                 </x-forms.form>
             </div>
         @endauth
