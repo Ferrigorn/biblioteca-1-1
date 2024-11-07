@@ -1,6 +1,6 @@
 <x-layout>
 
-    <x-titol-pagina>Biblioteca</x-titol-pagina>
+
 
     <section>
         <div class="flex flex-col items-center gap-6"> <!-- 'gap-6' per a una separació de 24px -->
@@ -66,7 +66,7 @@
                     <a href="/llibres/{{ $llibre['id'] }}" class="block w-full h-full">
                         <div class="flex flex-col items-center w-full h-full">
                             <x-card-llibre :$llibre class="w-full h-64 flex-grow"></x-card-llibre>
-                            <div class="text-center mt-2">
+                            <div class="text-center mt-2 p-4 bg-slate-700 rounded-md">
                                 Valoració Mitjana: {{ number_format($llibre->valoraciones_avg_rating, 2) }}
                             </div>
                         </div>

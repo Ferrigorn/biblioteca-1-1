@@ -17,9 +17,12 @@
 <body class="bg-black text-white px-4 py-4 font-gotisch">
     {{-- header amb logo, nav (llibres[select amb categories], sign in + login[guest], perfil + crear llibre + logout[auth]) --}}
     <div class="flex flex-row justify-between items-center mb-6">
-        <a href="/"><img src="{{ Vite::asset('resources/images/unnamed.png') }}" alt=""
-                width="50"></a>
+        <div class="flex flex-col items-center ">
+            <a href="/"><img src="{{ Vite::asset('resources/images/Logo_avis.png') }}" alt=""
+                    width="70"></a>
 
+            <h2 class="font-bold text-white font-gotisch text-4xl italic mb-6 text-shadow ">Biblioteca Molongui</h2>
+        </div>
         <div>
             <nav class="w-96 flex flex-row justify-between">
                 <x-a-nav href="/">Llibres</x-a-nav>
