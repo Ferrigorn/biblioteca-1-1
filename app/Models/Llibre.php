@@ -59,4 +59,10 @@ class Llibre extends Model
     {
         return $this->belongsToMany(User::class, 'llibre_user');
     }
+    //Deixar Llibre
+
+    public function deixat()
+    {
+        return $this->hasOne(LlibreDeixat::class)->latest();
+    }
 }

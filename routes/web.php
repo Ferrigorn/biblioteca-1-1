@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\LlibreDeixatController;
 use App\Http\Controllers\LlibresController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisteredUserController;
@@ -47,5 +48,7 @@ Route::delete('/llibres/{llibre}', [LlibresController::class, 'destroy']);
 Route::post('llibres/{llibre}/valoraciones', [ValoracionController::class, 'store'])->middleware('auth')->name('valoraciones.store');
 //comentaris
 Route::post('/llibres/{llibre}/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store');
+//marcar deixat
+Route::post('/llibres/{llibre}/deixar', [LlibreDeixatController::class, 'store'])->name('llibres_deixats.store');
 //marcar llegit
 Route::post('/llibres/{id}/marcar-llegit', [LlibresController::class, 'marcarLlegit'])->middleware('auth')->name('llibres.marcarLlegit');

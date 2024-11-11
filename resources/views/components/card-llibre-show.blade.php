@@ -21,4 +21,39 @@
     <div class="h-auto flex items-center w-1/2 ">
         <img src="{{ asset('storage/' . $llibre->portada) }}" alt="" class="flex h-50 w-full">
     </div>
+
+    <!-- Missatge si el llibre està deixat -->
+    @if ($llibre->deixat)
+        <h3 class="text-red-500 text-xl font-bold mt-3">Aquest llibre està deixat a {{ $llibre->deixat->a_qui }} des de
+            {{ $llibre->deixat->quan }}</h3>
+    @endif
+</div>
+</div>
+
+<!-- Botó i formulari per marcar el llibre com a deixat -->
+<div class="w-1/3 flex items-center justify-center">
+    @if (!$llibre->deixat)
+        <button onclick="toggleDeixarForm()"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Deixar</button>
+
+        <form action="{{ route('llibres_deixats.store', $llibre->id) }}" method="POST" id="deixarForm"
+            style="display: none;">
+            @csrf
+            <input type="text" name="a_qui" placeholder="A qui?" required
+                class="border border-gray-300 rounded p-2 my-2 w-full">
+            <input type="date" name="quan" placeholder="Quan?" required
+                class="border border-gray-300 rounded p-2 my-2 w-full">
+            <button type="submit"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2">Confirmar</button>
+        </form>
+    @endif
+</div>
+</div>
+
+<script>
+    function toggleDeixarForm() {
+        var form = document.getElementById('deixarForm');
+        form.style.display = (form.style.display === 'none') ? 'block' : 'none';
+    }
+</script>
 </div>
