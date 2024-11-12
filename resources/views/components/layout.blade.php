@@ -16,47 +16,46 @@
 
 <body class="bg-black text-white px-4 py-4 font-gotisch">
     {{-- header amb logo, nav (llibres[select amb categories], sign in + login[guest], perfil + crear llibre + logout[auth]) --}}
-    <div class="flex flex-row justify-evenly items-center mb-6 w-75">
-        <div class="flex flex-col items-center ">
+    <div class="grid grid-cols-3 gap-4 items-center mb-6 w-full">
+        <!-- Primer contenidor: Logo i títol -->
+        <div class="flex flex-col items-center">
             <a href="/"><img src="{{ Vite::asset('resources/images/Logo_avis.png') }}" alt=""
                     width="70"></a>
-
-            <h2 class="font-bold text-white font-gotisch text-4xl italic mb-6 text-shadow ">Biblioteca Molongui</h2>
-
+            <h2 class="font-bold text-white font-gotisch text-4xl italic mb-6 text-shadow">Biblioteca Molongui</h2>
         </div>
-        <div>
-            <nav class="w-75 flex flex-row justify-evenly">
+
+        <!-- Segon contenidor: Navegació -->
+        <div class="flex justify-center">
+            <nav class="flex gap-4">
                 <x-a-nav href="/">Llibres</x-a-nav>
                 <x-a-nav href="/llibres/autors">Autors</x-a-nav>
-
             </nav>
         </div>
 
-        @guest
-            <div class="flex flex-col gap-2 items-center w-75">
-                <a href="/registre" class="w-full">
+        <!-- Tercer contenidor: Opcions d'usuari -->
+        <div class="flex flex-col gap-2 items-center">
+            @guest
+                <a href="/registre" class="w-2/3 self-end">
                     <x-forms.button class="w-full text-center">Crear Compte</x-forms.button>
                 </a>
-                <a href="/login" class="w-full">
+                <a href="/login" class="w-2/3 self-end">
                     <x-forms.button class="w-full text-center">Log In</x-forms.button>
                 </a>
-            </div>
-        @endguest
+            @endguest
 
-        @auth
-            <div class="flex flex-col gap-2 items-center">
-                {{-- Auth::user()->id ho passem perque identifiqui l'usuari autentificat --}}
-                <a href="/perfil/{{ Auth::user()->id }}" class="w-full"><x-forms.button
-                        class="w-full text-center">Perfil</x-forms.button></a>
-                <a href="/crearllibres" class="w-full"><x-forms.button class="w-full text-center">Crear
-                        Llibre</x-forms.button></a>
-                <x-forms.form method="POST" action="/logout" class="w-full">
+            @auth
+                <a href="/perfil/{{ Auth::user()->id }}" class="w-2/3 self-end">
+                    <x-forms.button class="w-full text-center">Perfil</x-forms.button>
+                </a>
+                <a href="/crearllibres" class="w-2/3 self-end">
+                    <x-forms.button class="w-full text-center">Crear Llibre</x-forms.button>
+                </a>
+                <x-forms.form method="POST" action="/logout" class="w-2/3 self-end">
                     @csrf
                     <x-forms.button class="w-full text-center">Log Out</x-forms.button>
                 </x-forms.form>
-            </div>
-        @endauth
-
+            @endauth
+        </div>
     </div>
     <x-forms.divider />
     <main class="flex flex-col items-center justify-center">

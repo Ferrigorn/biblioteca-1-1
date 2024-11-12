@@ -38,11 +38,13 @@ Route::get('/llibres/autors/{autor}', [LlibresController::class, 'llibresAutor']
 //pagina llibre sol
 Route::get('/llibres/{llibre}', [LlibresController::class, 'show']);
 //pagina crear, modificar o eliminar llibre
-Route::get('/crearllibres', [LlibresController::class, 'create']); // /llibres/create no funciona. //crearLlibres tampoc
-Route::post('/llibres', [LlibresController::class, 'store']);
-Route::get('/llibres/{llibre}/edit', [LlibresController::class, 'edit']);
-Route::patch('/llibres/{llibre}', [LlibresController::class, 'update']);
-Route::delete('/llibres/{llibre}', [LlibresController::class, 'destroy']);
+Route::middleware('auth')->group(function () {
+    Route::get('/crearllibres', [LlibresController::class, 'create']); // /llibres/create no funciona. //crearLlibres tampoc
+    Route::post('/llibres', [LlibresController::class, 'store']);
+    Route::get('/llibres/{llibre}/edit', [LlibresController::class, 'edit']);
+    Route::patch('/llibres/{llibre}', [LlibresController::class, 'update']);
+    Route::delete('/llibres/{llibre}', [LlibresController::class, 'destroy']);
+});
 //valoracions
 
 Route::post('llibres/{llibre}/valoraciones', [ValoracionController::class, 'store'])->middleware('auth')->name('valoraciones.store');

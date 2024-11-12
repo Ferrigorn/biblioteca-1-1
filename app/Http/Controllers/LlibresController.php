@@ -119,7 +119,6 @@ class LlibresController extends Controller
             'genere' => ['required'],
             'ubicacio' => ['required'],
             'idioma' => ['required'],
-            // 'deixat' => ['nullable'],
             'coleccio' => ['required'],
             'portada' => ['file', 'mimes:png,svg,jpg,webp'],
         ]);
