@@ -94,8 +94,10 @@
     @endif
 
 
+    @auth
+        <a href="/llibres/{{ $llibre->id }}/edit">
+            <x-forms.button>Modificar dades</x-forms.button>
+        </a>
+    @endauth
 
-    <a href="/llibres/{{ $llibre->id }}/edit">
-        <x-forms.button>Modificar dades</x-forms.button>
-    </a>
 </x-layout>
