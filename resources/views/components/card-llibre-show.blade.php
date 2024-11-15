@@ -19,7 +19,8 @@
         </div>
     </div>
     <div class="h-auto flex items-center w-1/2 ">
-        <img src="{{ asset('storage/' . $llibre->portada) }}" alt="" class="flex h-50 w-full">
+        <img src="{{ asset($llibre->portada ? 'storage/' . $llibre->portada : 'fotos/llibrePerDefecte.jpg') }}"
+            alt="{{ $llibre->titol }}" class="w-full h-full object-cover">
     </div>
 
     <!-- Missatge si el llibre està deixat -->
