@@ -8,29 +8,35 @@ import 'slick-carousel/slick/slick-theme.css';
 import $ from 'jquery';
 import 'slick-carousel';
 
-// Importa tus estilos CSS (si aún no lo has hecho)
+
 import '../css/app.css';
 
-// Configuración de Slick Carousel
+// Configuració de Slick Carousel
 $(function() {
     $('.slick-slider').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2000,
+        centerMode: true,
+        centerPadding: '0px',
+        prevArrow: $('.slick-prev'), // Selector de la fletxa "previous"
+        nextArrow: $('.slick-next'), // Selector de la fletxa "next"
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 1
+                    slidesToScroll: 1,
+                    centerMode: false
                 }
             },
             {
                 breakpoint: 768,
                 settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1
+                    slidesToScroll: 1,
+                    centerMode: false
                 }
             }
         ]

@@ -28,17 +28,22 @@
 
     <x-forms.divider />
 
-    <div class="flex flex-col items-center">
-        <x-titol-seccio>Llibres aleatoris</x-titol-seccio>
-        <div class="slick-slider w-[90vw] h-[40vh]">
-            @foreach ($llibresRandom as $llibre)
-                <div class="w-[85vw] h-[35vh]">
-                    <a href="/llibres/{{ $llibre['id'] }}">
-                        <x-card-llibre :llibre="$llibre" />
-                    </a>
-                </div>
-            @endforeach
+    <div class="relative w-[90vw]">
+        <div class="flex flex-col items-center overflow-hidden">
+            <x-titol-seccio>Llibres aleatoris</x-titol-seccio>
+            <div class="slick-slider w-full h-[40vh] relative" style="perspective: 1000px;">
+                @foreach ($llibresRandom as $llibre)
+                    <div class="w-[85vw] h-[35vh]">
+                        <a href="/llibres/{{ $llibre['id'] }}">
+                            <x-card-llibre :llibre="$llibre" />
+                        </a>
+                    </div>
+                @endforeach
+            </div>
         </div>
+        <!-- Fletxes amb identificadors -->
+        <button class="slick-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-50">‹</button>
+        <button class="slick-next absolute right-0 top-1/2 transform -translate-y-1/2 z-50">›</button>
     </div>
 
     <x-forms.divider />
