@@ -52,5 +52,7 @@ Route::post('llibres/{llibre}/valoraciones', [ValoracionController::class, 'stor
 Route::post('/llibres/{llibre}/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store');
 //marcar deixat
 Route::post('/llibres/{llibre}/deixar', [LlibreDeixatController::class, 'store'])->name('llibres_deixats.store');
+//borrar deixat
+Route::delete('/llibres_deixats/{llibre}', [LlibreDeixatController::class, 'destroy'])->name('llibres_deixats.destroy');
 //marcar llegit
 Route::post('/llibres/{id}/marcar-llegit', [LlibresController::class, 'marcarLlegit'])->middleware('auth')->name('llibres.marcarLlegit');

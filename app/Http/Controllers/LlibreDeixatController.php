@@ -23,4 +23,12 @@ class LlibreDeixatController extends Controller
 
         return redirect()->back()->with('success', 'El llibre ha estat marcat com a deixat.');
     }
+
+    public function destroy(Llibre $llibre)
+    {
+        // Elimina el registre del llibre deixat
+        $llibre->deixat()->delete();
+
+        return redirect()->back()->with('success', 'El llibre ha estat tornat.');
+    }
 }
