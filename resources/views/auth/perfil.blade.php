@@ -1,6 +1,6 @@
 <x-layout>
-    <x-titol-pagina>Perfil {{ $user->name }}</x-titol-pagina>
-    <div class="m-4 p-4 w-11/12 h-auto bg-cover bg-center flex flex-col justify-around rounded-xl opacity-90 shadow-white shadow-lg "
+    <x-titol-pagina>{{ $user->name }}</x-titol-pagina>
+    <div class="m-4 p-4 w-11/12 h-auto bg-cover bg-center flex  justify-around rounded-xl opacity-90 shadow-white shadow-lg "
         style="background-image: url({{ Vite::asset('resources/images/pergami.png') }})">
         <div class="w-2/3 flex flex-col justify-between items-start">
             <div class="flex flex-col items-start mb-20 ">
@@ -13,14 +13,14 @@
 
         </div>
         <div class="h-auto flex items-center w-1/2 ">
-            <img src="{{ asset('storage/' . $user->foto) }}" alt="" class="  flex h-auto w-full">
+            <img src="{{ asset('storage/' . $user->foto) }}" alt="" class="  flex h-auto w-full rounded">
         </div>
 
     </div>
     <a href="/perfil/{{ $user->id }}/edit">
         <x-forms.button>Modificar Perfil</x-forms.button>
     </a>
-    <h1>Has llegit els següents llibres</h1>
+    <x-titol-seccio>Has llegit els següents llibres</x-titol-seccio>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @forelse($user->llibresLlegits as $llibre)
             <a href="/llibres/{{ $llibre['id'] }}">

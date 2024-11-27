@@ -6,6 +6,7 @@ use App\Models\Llibre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class LlibresController extends Controller
 {
@@ -82,12 +83,33 @@ class LlibresController extends Controller
     }
 
     //Autors
+
+
     public function showAutors()
     {
-        $autors = Llibre::select('autor')->distinct()->get();
-        return view('llibres.autor', compact('autors'));
-    }
+        // Obtenim els autors únics vàlids
+        $autorsUnics = Llibre::select('autor')
+            ->whereNotNull('autor') // Exclou NULL
+            ->where('autor', '!=', '') // Exclou valors buits
+            ->distinct()
+            ->orderBy('autor', 'asc')
+            ->pluck('autor');
 
+        // Paginació manual
+        $perPage = 20;
+        $currentPage = request()->input('page', 1);
+        $currentItems = $autorsUnics->slice(($currentPage - 1) * $perPage, $perPage)->values();
+
+        $autorsPaginats = new LengthAwarePaginator(
+            $currentItems,
+            $autorsUnics->count(),
+            $perPage,
+            $currentPage,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        return view('llibres.autor', ['autors' => $autorsPaginats]);
+    }
     public function llibresAutor($autor)
     {
         // Obtenim els llibres de l'autor seleccionat
@@ -171,7 +193,7 @@ class LlibresController extends Controller
             'genere' => ['required'],
             'ubicacio' => ['required'],
             'idioma' => ['required'],
-            'coleccio' => ['required'],
+            'coleccio' => [],
             'portada' => ['file', 'mimes:png,svg,jpg,webp'],
         ]);
 

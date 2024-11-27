@@ -1,6 +1,7 @@
 <x-layout>
-    <x-titol-pagina>Modifica el teu perfil {{ $user->name }}</x-titol-pagina>
-    <div class="flex w-full h-1/6">
+    <x-titol-pagina> {{ $user->name }}</x-titol-pagina>
+    <x-titol-seccio>Modifica el teu perfil</x-titol-seccio>
+    <div class="flex w-full h-1/6 items-center justify-center">
 
 
         <x-forms.form method="POST" action="/perfil/{{ $user->id }}" enctype="multipart/form-data">
