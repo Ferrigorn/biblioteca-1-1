@@ -15,7 +15,7 @@
             <h3 class="text-black text-xl font-bold mt-3">Idioma: {{ $llibre->idioma }}</h3>
             <h3 class="text-black text-xl font-bold mt-3">Col·lecció: {{ $llibre->coleccio }}</h3>
             <h3 class="text-black text-xl font-bold mt-3">Valoració:
-                {{ $llibre->mediana_valoraciones ?? 'No hay valoraciones aún' }}</h3>
+                {{ $llibre->mediana_valoraciones ?? 'No hi ha Valoracions encara, sigues el primer!' }}</h3>
         </div>
     </div>
     <div class="h-auto flex items-center w-1/2 ">

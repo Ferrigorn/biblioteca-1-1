@@ -1,4 +1,4 @@
-<div class="mb-6 p-4 w-11/12 h-60 bg-cover bg-center flex flex-row justify-between rounded-xl opacity-90 shadow-white shadow-lg hover:scale-125 transition duration-200"
+<div class="mb-6 p-4 w-11/12 h-60 bg-cover bg-center flex flex-row justify-between rounded-xl opacity-90 shadow-white shadow-lg hover:scale-110 transition duration-200"
     style="background-image: url({{ Vite::asset('resources/images/pergami.png') }})">
     <div class="flex flex-col items-start w-1/2 h-full">
         <h3 class="text-black text-3xl font-bold mt-3 text-shadow-black">{{ $llibre->titol }}</h3>

@@ -25,11 +25,13 @@
                     style="display: none;">
                     @csrf
                     <input type="text" name="a_qui" placeholder="A qui?" required
-                        class="border border-gray-300 rounded p-2 my-2 w-full">
+                        class="border border-gray-300 rounded p-2 my-2 w-full text-gray-900">
                     <input type="date" name="quan" placeholder="Quan?" required
-                        class="border border-gray-300 rounded p-2 my-2 w-full">
-                    <button type="submit"
-                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2">Confirmar</button>
+                        class="border border-gray-300 rounded p-2 my-2 w-full text-gray-900">
+                    <div class="flex items-center justify-center">
+                        <button type="submit"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2 ">Confirmar</button>
+                    </div>
                 </form>
             @else
                 <form action="{{ route('llibres_deixats.destroy', $llibre->id) }}" method="POST">
@@ -53,9 +55,8 @@
         <!-- Secció Comentaris -->
         <div class="col-span-1 flex flex-col items-center justify-center ">
             <x-titol-seccio class="mb-4">Comentaris</x-titol-seccio>
-            <div class="relative w-full max-w-md flex flex-col justify-center">
-                <x-forms.button id="toggleComments"
-                    class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md shadow-md hover:bg-gray-300">
+            <div class="relative w-full max-w-md flex flex-col justify-center items-center">
+                <x-forms.button id="toggleComments" class="w-[164px]">
                     Veure Comentaris
                 </x-forms.button>
                 <div id="commentsSection"
@@ -103,8 +104,7 @@
             </div>
 
             <!-- Secció Valoracions -->
-            <div
-                class="col-span-1 flex flex-col items-center justify-center border border-gray-300 rounded pb-2 border-opacity-50">
+            <div class="col-span-1 flex flex-col items-center justify-center  pb-2 ">
                 <x-titol-seccio class="mb-4">Valoracions</x-titol-seccio>
                 @auth
                     <form class="flex flex-col gap-4 items-center w-full max-w-md"

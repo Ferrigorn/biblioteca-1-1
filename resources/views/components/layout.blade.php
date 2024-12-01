@@ -35,9 +35,7 @@
         <!-- Tercer contenidor: Opcions d'usuari -->
         <div class="flex flex-col gap-2 items-center">
             @guest
-                <a href="/registre" class="w-2/3 self-end">
-                    <x-forms.button class="w-full text-center">Crear Compte</x-forms.button>
-                </a>
+
                 <a href="/login" class="w-2/3 self-end">
                     <x-forms.button class="w-full text-center">Log In</x-forms.button>
                 </a>

@@ -25,7 +25,7 @@ class LlibresController extends Controller
         if ($selectedGenere && $generes->contains($selectedGenere)) {
             $llibres = Llibre::where('genere', $selectedGenere)->paginate(9);
         } else {
-            $llibres = Llibre::paginate(9);
+            $llibres = Llibre::paginate(50);
         }
 
         $llibresRandom = Llibre::inRandomOrder()->limit(10)->get();
@@ -151,9 +151,9 @@ class LlibresController extends Controller
             $llibreAttributes['portada'] = $portada; // Asigna el nombre de la imagen al atributo 'portada' en $llibreAttributes
         }
 
-        Llibre::create($llibreAttributes);
+        $llibre = Llibre::create($llibreAttributes);
 
-        return redirect('/');
+        return redirect()->route('llibres.show', ['llibre' => $llibre->id]);
     }
 
     /**
