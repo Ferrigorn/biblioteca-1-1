@@ -6,16 +6,15 @@ use App\Http\Controllers\LlibresController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValoracionController;
+use App\Http\Middleware\EnsureUserIsAdmin;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+
 
 //pagina registre
-Route::get('/registre', [RegisteredUserController::class, 'create']);
-Route::post('/registre', [RegisteredUserController::class, 'store']);
+Route::get('/registre', [RegisteredUserController::class, 'create'])->middleware(EnsureUserIsAdmin::class);
+Route::post('/registre', [RegisteredUserController::class, 'store'])->middleware(EnsureUserIsAdmin::class);
 
 //pagina login + perfil
 Route::get('/login', [SessionController::class, 'create'])->name('login');

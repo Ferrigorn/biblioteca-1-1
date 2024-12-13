@@ -13,16 +13,15 @@ return new class extends Migration
     {
         Schema::create('llibres', function (Blueprint $table) {
             $table->id();
-            $table->string('titol');
-            $table->string('autor');
-            $table->string('editorial');
-            $table->integer('anyEdicio');
-            $table->string('genere');
-            $table->string('ubicacio');
-            $table->string('idioma');
-            // $table->boolean('deixat');
-            $table->string('coleccio');
-            $table->string('portada');
+            $table->string('titol')->nullable();
+            $table->string('autor')->nullable();
+            $table->string('editorial')->nullable();
+            $table->integer('anyEdicio')->nullable();
+            $table->string('genere')->nullable();
+            $table->string('ubicacio')->nullable();
+            $table->string('idioma')->nullable();
+            $table->string('coleccio')->nullable();
+            $table->string('portada')->nullable();
             $table->timestamps();
         });
     }

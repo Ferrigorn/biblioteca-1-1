@@ -30,7 +30,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'foto'
+        'foto',
+        'rol'
     ];
 
     // relació amb Comentaris

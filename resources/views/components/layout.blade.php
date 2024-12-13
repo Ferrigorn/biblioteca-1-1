@@ -48,6 +48,12 @@
                 <a href="/crearllibres" class="w-2/3 self-end">
                     <x-forms.button class="w-full text-center">Crear Llibre</x-forms.button>
                 </a>
+                <!-- Botó Crear Compte (Només per a admins) -->
+                @if (Auth::user()->rol === 'admin')
+                    <a href="/registre" class="w-2/3 self-end">
+                        <x-forms.button class="w-full text-center">Crear Compte</x-forms.button>
+                    </a>
+                @endif
                 <x-forms.form method="POST" action="/logout" class="w-2/3 self-end">
                     @csrf
                     <x-forms.button class="w-full text-center">Log Out</x-forms.button>
