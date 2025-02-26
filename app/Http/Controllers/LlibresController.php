@@ -112,13 +112,15 @@ class LlibresController extends Controller
     }
     public function llibresAutor($autor)
     {
-        // Obtenim els llibres de l'autor seleccionat
-        $llibres = Llibre::where('autor', $autor)->get();
+        // Normalitzar l'autor eliminant símbols no desitjats
+        $autor = str_replace(['+'], ' ', $autor);
+
+        // Obtenim els llibres de l'autor
+        $llibres = Llibre::where('autor', 'LIKE', "%$autor%")->get();
 
         // Passar l'autor i els llibres a la vista
         return view('llibres.llibres-autor', compact('autor', 'llibres'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -251,6 +253,15 @@ class LlibresController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $llibre = Llibre::findOrFail($id);
+
+        // Opcional: Esborrar la imatge de la portada si n'hi ha una
+        if ($llibre->portada) {
+            Storage::disk('public')->delete($llibre->portada);
+        }
+
+        $llibre->delete();
+
+        return redirect()->route('llibres.index')->with('success', 'Llibre eliminat correctament.');
     }
 }

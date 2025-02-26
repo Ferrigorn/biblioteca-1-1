@@ -8,8 +8,7 @@
         <div class="flex flex-col items-center justify-center">
             <form action="{{ route('llibres.marcarLlegit', $llibre->id) }}" method="POST">
                 @csrf
-                @if (auth()->user() &&
-                        auth()->user()->llibresLlegits->contains($llibre->id))
+                @if (auth()->user() && auth()->user()->llibresLlegits->contains($llibre->id))
                     <x-forms.button type="submit">Desmarcar com a llegit</x-forms.button>
                 @else
                     <x-forms.button type="submit">Marcar com a llegit</x-forms.button>
@@ -132,12 +131,24 @@
         </div>
 
         <!-- Tercera fila -->
-        <div class="col-span-2 flex items-center justify-center mt-2">
+        <div class="col-span-2 flex items-center justify-evenly mt-2 space-x-4">
             @auth
                 <a href="/llibres/{{ $llibre->id }}/edit">
                     <x-forms.button>Modificar dades</x-forms.button>
                 </a>
             @endauth
+
+            @auth
+                <form action="/llibres/{{ $llibre->id }}" method="POST"
+                    onsubmit="return confirm('Estàs segur que vols eliminar aquest llibre?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        Eliminar
+                    </button>
+                </form>
+            @endauth
         </div>
+
         </div>
     </x-layout>

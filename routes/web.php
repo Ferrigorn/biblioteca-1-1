@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/llibres', [LlibresController::class, 'store']);
     Route::get('/llibres/{llibre}/edit', [LlibresController::class, 'edit']);
     Route::patch('/llibres/{llibre}', [LlibresController::class, 'update']);
-    Route::delete('/llibres/{llibre}', [LlibresController::class, 'destroy']);
+    Route::delete('/llibres/{llibre}', [LlibresController::class, 'destroy'])->name('llibres.destroy');
 });
 //valoracions
 
